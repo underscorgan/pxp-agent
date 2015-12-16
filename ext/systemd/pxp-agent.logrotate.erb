@@ -6,6 +6,10 @@
     notifempty
     sharedscripts
     postrotate
+<% if platform.is_deb? -%>
+        /bin/systemctl kill --signal=USR2 --kill-who=main pxp-agent.service
+<% else -%>
         /usr/bin/systemctl kill --signal=USR2 --kill-who=main pxp-agent.service
+<% end -%>
     endscript
 }
